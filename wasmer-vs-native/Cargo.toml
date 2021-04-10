@@ -1,0 +1,16 @@
+[package]
+name = "benchmarks"
+version = "0.1.0"
+authors = ["Aleksey Kladov <aleksey.kladov@gmail.com>"]
+edition = "2018"
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = "z"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dev-dependencies]
+wasmer = { version="1.0", default-features = false, features = ["singlepass", "jit", "wat"]}
