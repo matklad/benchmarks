@@ -1,0 +1,19 @@
+[package]
+name = "main"
+version = "0.1.0"
+authors = ["Aleksey Kladov <aleksey.kladov@gmail.com>"]
+edition = "2018"
+
+[profile.release]
+panic = "abort"
+debug = true
+
+[profile.dev]
+panic = "abort"
+
+[dependencies]
+dep = {path="../dep"}
+
+[features]
+inline-foo = ["dep/inline-foo"]
+inline-bar = ["dep/inline-bar"]
