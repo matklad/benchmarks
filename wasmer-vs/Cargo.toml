@@ -13,4 +13,4 @@ opt-level = "z"
 crate-type = ["cdylib", "rlib"]
 
 [dev-dependencies]
-wasmer = { version="1.0", default-features = false, features = ["singlepass", "jit", "wat"]}
+wasmer = { version="2.0", default-features = false, features = ["singlepass", "universal", "wat"]}

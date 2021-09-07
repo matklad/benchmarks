@@ -18,7 +18,7 @@ fn main() {
     println!("{}", res);
     println!("{:?}", t.elapsed());
 
-    let jit = wasmer::JIT::new(wasmer::Singlepass::new());
+    let jit = wasmer::Universal::new(wasmer::Singlepass::new());
     let store = wasmer::Store::new(&jit.engine());
     let bytes = include_bytes!("../target/wasm32-unknown-unknown/release/benchmarks.wasm");
     let module = wasmer::Module::new(&store, bytes).unwrap();
