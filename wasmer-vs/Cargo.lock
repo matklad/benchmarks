@@ -41,6 +41,7 @@ dependencies = [
 name = "benchmarks"
 version = "0.1.0"
 dependencies = [
+ "wasm3",
  "wasmer",
 ]
 
@@ -121,6 +122,12 @@ dependencies = [
  "cfg-if",
  "lazy_static",
 ]
+
+[[package]]
+name = "cty"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7313c0d620d0cb4dbd9d019e461a4beb501071ff46ec0ab933efb4daa76d73e3"
 
 [[package]]
 name = "darling"
@@ -747,6 +754,26 @@ name = "wasi"
 version = "0.10.2+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fd6fbd9a79829dd1ad0cc20627bf1ed606756a7f77edff7b66b7064f9cb327c6"
+
+[[package]]
+name = "wasm3"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "170fc767bb584a3871e1bfe935a689446cbeef99d07255132ed551b6665ae3f3"
+dependencies = [
+ "cty",
+ "wasm3-sys",
+]
+
+[[package]]
+name = "wasm3-sys"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fed8ddb52050c8cdcf4bc390b053c7031e830354b0cf54c5bdb1ea831c8a7002"
+dependencies = [
+ "cc",
+ "cty",
+]
 
 [[package]]
 name = "wasmer"
