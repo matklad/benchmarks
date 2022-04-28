@@ -1,0 +1,10 @@
+[package]
+name = "mylib"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+overflow-checks = true
+
+[dependencies]
+rand = "0.8"
