@@ -10,6 +10,12 @@ checksum = "6b4930d2cb77ce62f89ee5d5289b4ac049559b1c45539271f5ed4fdc7db34545"
 
 [[package]]
 name = "arrayvec"
+version = "0.5.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "23b62fc65de8e4e7f52534fb52b0f3ed04746ae267519eef2a83941e8085068b"
+
+[[package]]
+name = "arrayvec"
 version = "0.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8da52d66c7071e2e3fa2a1e5c6d088fec47b593032b254f5e980de8ea54454d6"
@@ -21,10 +27,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "42ae2468a89544a466886840aa467a25b766499f4f04bf7d9fcd10ecee9fccef"
 dependencies = [
  "arrayref",
- "arrayvec",
+ "arrayvec 0.7.2",
  "cc",
  "cfg-if",
- "constant_time_eq",
+ "constant_time_eq 0.2.5",
  "digest",
 ]
 
@@ -48,6 +54,12 @@ name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+
+[[package]]
+name = "constant_time_eq"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "245097e9a4535ee1e3e3931fcfcd55a796a44c643e8596ff6566d68f09b87bbc"
 
 [[package]]
 name = "constant_time_eq"
@@ -87,10 +99,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "kangarootwelve_xkcp"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8988ead523af3eca105f6c16722f2aee442fc12c0095540a7751ad7de8ce3d91"
+dependencies = [
+ "arrayvec 0.5.2",
+ "cc",
+ "constant_time_eq 0.1.5",
+]
+
+[[package]]
 name = "rust"
 version = "0.1.0"
 dependencies = [
  "blake3",
+ "kangarootwelve_xkcp",
 ]
 
 [[package]]

@@ -5,7 +5,11 @@ fn main() -> std::io::Result<()> {
     let attempts = 100_000;
     let t = std::time::Instant::now();
     for i in 0..attempts {
-        let hash = blake3::hash(&data.as_slice());
+        #[cfg(not(feature = "k12"))]
+        let hash = blake3::hash(data.as_slice());
+        #[cfg(feature = "k12")]
+        let hash = kangarootwelve_xkcp::hash(data.as_slice());
+
         res = res.wrapping_add(hash.as_bytes()[i % 32] as u32);
     }
 

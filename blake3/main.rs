@@ -11,6 +11,9 @@ fn main() -> std::io::Result<()> {
     eprintln!("\nRust:");
     exec("cargo run -q --release --manifest-path ./rust/Cargo.toml --features=pure")?;
 
+    eprintln!("\nRust + k12:");
+    exec("cargo run -q --release --manifest-path ./rust/Cargo.toml --features=k12")?;
+
     eprintln!("\nZig + ReleaseFast");
     exec("zig run -O ReleaseFast ./zig/main.zig")?;
 
