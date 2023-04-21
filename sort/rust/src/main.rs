@@ -21,6 +21,10 @@ fn main() -> std::io::Result<()> {
     }
 
     let t = t.elapsed();
-    println!("fingerprint={}\ntime = {t:0.2?}", data[0][0],);
+    println!(
+        "fingerprint={}\ntime = {t:0.2?}\n64MiB round = {:0.2?}",
+        data[0][0],
+        t / (attempts as u32)
+    );
     Ok(())
 }

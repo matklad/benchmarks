@@ -37,9 +37,11 @@ pub fn main() !void {
     std.debug.print(
         \\fingerprint={}
         \\time  = {}
+        \\64MiB round = {}
         \\
     , .{
         array[0][0],
         std.fmt.fmtDuration(nanos),
+        std.fmt.fmtDuration(nanos / attempts),
     });
 }

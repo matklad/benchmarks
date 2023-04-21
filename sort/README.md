@@ -8,23 +8,28 @@ $ rustc main.rs && ./main
 ```
 Rust + unstable:
 fingerprint=321502070426280560397710517997363019623
-time = 415.60ms
+time = 424.10ms
+64MiB round = 42.41ms
 
 Rust + cached-key
 fingerprint=321502070426280560397710517997363019623
-time = 447.20ms
+time = 456.57ms
+64MiB round = 45.66ms
 
 Rust + stable:
 fingerprint=321502070426280560397710517997363019623
-time = 777.04ms
+time = 765.45ms
+64MiB round = 76.55ms
 
 Zig + ReleaseFast
 fingerprint=321502070426280560397710517997363019623
-time  = 1.13s
+time  = 1.147s
+64MiB round = 114.714ms
 
 Zig + ReleaseSafe
 fingerprint=321502070426280560397710517997363019623
-time  = 1.123s
+time  = 1.137s
+64MiB round = 113.774ms
 ```
 
 ```
