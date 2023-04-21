@@ -1,0 +1,12 @@
+[package]
+name = "rust"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+blake3 = "1.3.3"
+kangarootwelve_xkcp = "0.1.5"
+
+[features]
+stable-sort = []
