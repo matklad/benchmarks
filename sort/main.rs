@@ -8,14 +8,17 @@ fn main() -> std::io::Result<()> {
     eprintln!("\nRust + unstable:");
     exec("cargo run -q --release --manifest-path ./rust/Cargo.toml")?;
 
+    eprintln!("\nRust + cached-key");
+    exec("cargo run -q --release --manifest-path ./rust/Cargo.toml --features cached-key")?;
+
     eprintln!("\nRust + stable:");
     exec("cargo run -q --release --manifest-path ./rust/Cargo.toml --features stable-sort")?;
 
     eprintln!("\nZig + ReleaseFast");
-    exec("/home/matklad/tmp/zig/zig run -O ReleaseFast ./zig/main.zig")?;
+    exec("zig run -O ReleaseFast ./zig/main.zig")?;
 
     eprintln!("\nZig + ReleaseSafe");
-    exec("/home/matklad/tmp/zig/zig run -O ReleaseSafe ./zig/main.zig")?;
+    exec("zig run -O ReleaseSafe ./zig/main.zig")?;
 
     Ok(())
 }

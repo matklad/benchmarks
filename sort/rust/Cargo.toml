@@ -10,3 +10,4 @@ kangarootwelve_xkcp = "0.1.5"
 
 [features]
 stable-sort = []
+cached-key = []

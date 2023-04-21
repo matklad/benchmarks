@@ -14,7 +14,9 @@ fn main() -> std::io::Result<()> {
         let k = i % 8;
         #[cfg(feature = "stable-sort")]
         data.sort_by_key(|it| it[k]);
-        #[cfg(not(feature = "stable-sort"))]
+        #[cfg(feature = "cached-key")]
+        data.sort_by_cached_key(|it| it[k]);
+        #[cfg(all(not(feature = "stable-sort"), not(feature = "cached-key")))]
         data.sort_unstable_by_key(|it| it[k]);
     }
 
