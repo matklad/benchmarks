@@ -9,12 +9,12 @@ pub fn main() !void {
     defer file.close();
 
     // Read the contents
-    const data = try file.readToEndAlloc(allocator, 64 * 1024);
+    const data = try file.readToEndAlloc(allocator, 64 * 1024 * 1024);
     defer allocator.free(data);
-    std.debug.assert(data.len == 64 * 1024);
+    std.debug.assert(data.len == 64 * 1024 * 1024);
 
     var res: u32 = 0;
-    const attempts = 100_000;
+    const attempts = 100;
     var i: usize = 0;
     var t = try std.time.Timer.start();
     while (i < attempts) : (i += 1) {

@@ -1,7 +1,7 @@
 fn main() -> std::io::Result<()> {
     let data: Vec<u8> = random_numbers()
         .flat_map(|it| it.to_le_bytes())
-        .take(64 * 1024)
+        .take(64 * 1024 * 1024)
         .collect();
     std::fs::write("./input.data", data.as_slice())?;
 
@@ -10,6 +10,9 @@ fn main() -> std::io::Result<()> {
 
     eprintln!("\nRust:");
     exec("cargo run -q --release --manifest-path ./rust/Cargo.toml --features=pure")?;
+
+    eprintln!("\nRust with threads:");
+    exec("cargo run -q --release --manifest-path ./rust/Cargo.toml --features=threading")?;
 
     eprintln!("\nRust + k12:");
     exec("cargo run -q --release --manifest-path ./rust/Cargo.toml --features=k12")?;

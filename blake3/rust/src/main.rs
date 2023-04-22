@@ -1,16 +1,21 @@
 fn main() -> std::io::Result<()> {
     let data = std::fs::read("./input.data")?;
-    assert_eq!(data.len(), 64 * 1024);
+    assert_eq!(data.len(), 64 * 1024 * 1024);
     let mut res = 0u32;
-    let attempts = 100_000;
+    let attempts = 100;
     let t = std::time::Instant::now();
     for i in 0..attempts {
-        #[cfg(not(feature = "k12"))]
-        let hash = blake3::hash(data.as_slice());
-        #[cfg(feature = "k12")]
-        let hash = kangarootwelve_xkcp::hash(data.as_slice());
-
-        res = res.wrapping_add(hash.as_bytes()[i % 32] as u32);
+        let hash: [u8; 32] = if cfg!(feature = "k12") {
+            kangarootwelve_xkcp::hash(data.as_slice()).into()
+        } else if cfg!(feature = "threading") {
+            blake3::Hasher::new()
+                .update_rayon(data.as_slice())
+                .finalize()
+                .into()
+        } else {
+            blake3::hash(data.as_slice()).into()
+        };
+        res = res.wrapping_add(hash[i % 32] as u32);
     }
 
     let t = t.elapsed();
