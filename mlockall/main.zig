@@ -10,12 +10,13 @@ const MAP_SIZE: usize = 16 * GiB;
 const PAGE_SIZE: usize = 4 * KiB;
 
 pub fn main() !void {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    defer _ = gpa.deinit();
-    const allocator = gpa.allocator();
+    var gpa_instance = std.heap.GeneralPurposeAllocator(.{}){};
+    defer _ = gpa_instance.deinit();
 
-    const args = try std.process.argsAlloc(allocator);
-    defer std.process.argsFree(allocator, args);
+    const gpa = gpa_instance.allocator();
+
+    const args = try std.process.argsAlloc(gpa);
+    defer std.process.argsFree(gpa, args);
 
     var lock: struct {
         current: bool = false,
@@ -86,6 +87,19 @@ pub fn main() !void {
     const touch_ns = timer.read();
 
     // ---------------------------------------------------------------------
+    // Stage 4: munmap + allocate with gpa
+    // ---------------------------------------------------------------------
+    timer.reset();
+
+    err = linux.E.init(linux.munmap(@ptrFromInt(addr), MAP_SIZE));
+    if (err != .SUCCESS) std.debug.panic("munmap err={}", .{err});
+
+    const gpa_mem = try gpa.alloc(u8, MAP_SIZE);
+    defer gpa.free(gpa_mem);
+
+    const gpa_alloc_ns = timer.read();
+
+    // ---------------------------------------------------------------------
     // Reporting
     // ---------------------------------------------------------------------
     const out = std.io.getStdOut().writer();
@@ -93,4 +107,5 @@ pub fn main() !void {
     try out.print("mmap 16GiB:      {}\n", .{std.fmt.fmtDuration(mmap_ns)});
     try out.print("mlockall:        {}\n", .{std.fmt.fmtDuration(mlock_ns)});
     try out.print("page touching:   {}\n", .{std.fmt.fmtDuration(touch_ns)});
+    try out.print("gpa alloc:       {}\n", .{std.fmt.fmtDuration(gpa_alloc_ns)});
 }
